@@ -7,12 +7,17 @@
 #include "os-shared-globaldefs.h"
 #include "os-freertos.h"
 
+OS_impl_module_internal_record_t OS_impl_module_table[OS_MAX_MODULES];
+OS_module_internal_record_t OS_module_table[OS_MAX_MODULES];
+
 int32 OS_FreeRTOS_ModuleAPI_Impl_Init(void){
-    return OS_SUCCESS;  // @FIXME
+    memset(OS_impl_module_table, 0, sizeof(OS_impl_module_table));
+	return OS_SUCCESS;
 }
 
 int32 OS_ModuleAPI_Init(void){
-    return OS_SUCCESS;  // @FIXME
+    memset(OS_module_table, 0, sizeof(OS_module_table));
+    return OS_SUCCESS;
 }
 
 int32 OS_ModuleLoad(osal_id_t *module_id, const char *module_name, const char *filename, uint32 flags){
