@@ -106,6 +106,8 @@ int32 OS_API_Init(void)
     osal_objtype_t idtype;
     uint32         microSecPerSec;
 
+    OS_DEBUG("Beginning OS_API_Init()\n");
+    
     /*
      * If OSAL is already initialized, not really a big issue, just return.
      * This is not typically expected though, so its worth a debug statement.

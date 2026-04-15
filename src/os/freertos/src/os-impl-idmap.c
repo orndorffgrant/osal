@@ -115,3 +115,19 @@ int32 OS_FreeRTOS_TableMutex_Init(osal_objtype_t idtype)
 
     return return_code;
 }
+
+/*----------------------------------------------------------------
+
+   Purpose: Block the caller until some sort of change event
+   has occurred for the given object type, such as a record changing
+   state i.e. the acquisition or release of a lock/refcount from
+   another thread.
+
+   It is not guaranteed what, if any, state change has actually
+   occurred when this function returns.  This may be implemented as
+   a simple OS_TaskDelay().
+
+ ------------------------------------------------------------------*/
+void OS_WaitForStateChange_Impl(osal_objtype_t objtype, uint32 attempts) {
+    OS_TaskDelay(100); // TODO do better
+}

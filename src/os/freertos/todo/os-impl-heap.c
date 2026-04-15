@@ -5,6 +5,8 @@
 #include "os-shared-globaldefs.h"
 #include "os-freertos.h"
 
-int32 OS_NetworkAPI_Init(void){
-    return OS_SUCCESS;  // @FIXME
+HeapStats_t heapStats;
+
+int32 OS_HeapGetInfo_Impl(OS_heap_prop_t *heap_prop){
+    return OS_ERROR;  // @FIXME
 }

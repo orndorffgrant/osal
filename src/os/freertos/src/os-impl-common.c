@@ -1,3 +1,4 @@
+#include "freertos/idf_additions.h"
 #include "os-freertos.h"
 #include "os-shared-common.h"
 
@@ -50,10 +51,12 @@ int32 OS_API_Impl_Init(osal_objtype_t idtype)
 
 void OS_IdleLoop_Impl()
 {
-    for(;;){}
+    for(;;){
+        vTaskDelay(1);
+    }
 } 
 
 void OS_ApplicationShutdown_Impl()
 {
-    return OS_ERROR; // @FIXME
-} 
+    // return OS_ERROR; // @FIXME
+}

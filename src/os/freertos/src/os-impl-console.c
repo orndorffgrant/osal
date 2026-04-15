@@ -36,7 +36,7 @@ static void OS_ConsoleTask_Entry(void *pvParameters)
     {
         local = OS_OBJECT_TABLE_GET(OS_impl_console_table, token);
 
-        while (OS_SharedGlobalVars.ShutdownFlag != OS_SHUTDOWN_MAGIC_NUMBER){
+        while (OS_SharedGlobalVars.GlobalState != OS_SHUTDOWN_MAGIC_NUMBER){
             OS_ConsoleOutput_Impl(&token);
             xSemaphoreTake(local->console_sem, portMAX_DELAY);
         }
@@ -61,25 +61,27 @@ int32 OS_ConsoleCreate_Impl(const OS_object_token_t *token){
     local->is_async = OS_CONSOLE_ASYNC;
 
     // initialize BSP console support
-    PSP_Console_Init();
+    // PSP_Console_Init(); // doesn't seem to exist anywhere anymore
 
     // create semaphore and release semaphore; must be done at semaphore creation
     local->console_sem = xSemaphoreCreateBinary();
     xSemaphoreGive(local->console_sem);
 
-    // create task
-    xReturnCode = xTaskCreate(
-        &OS_ConsoleTask_Entry,
-        "console task",
-        OS_CONSOLE_TASK_STACKSIZE,
-        (void*) token->obj_id,  // pvParameters
-        OS_CONSOLE_TASK_PRIORITY,
-        &local->task_handle  // pxCreatedTask handle
-    );
-
-    // @FYI: FreeRTOS often returns 1 (pdTRUE) whereas OSAL returns 0 for OS_SUCCESS
-    if(xReturnCode != pdPASS){
-        return OS_ERROR;
+    if(local->is_async){
+        // create task
+        xReturnCode = xTaskCreate(
+            &OS_ConsoleTask_Entry,
+            "console task",
+            OS_CONSOLE_TASK_STACKSIZE,
+            (void*) token->obj_id,  // pvParameters
+            OS_CONSOLE_TASK_PRIORITY,
+            &local->task_handle  // pxCreatedTask handle
+        );
+    
+        // @FYI: FreeRTOS often returns 1 (pdTRUE) whereas OSAL returns 0 for OS_SUCCESS
+        if(xReturnCode != pdPASS){
+            return OS_ERROR;
+        }
     }
 
     return OS_SUCCESS;

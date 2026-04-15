@@ -2,8 +2,6 @@
 #include <unistd.h>
 #include <sys/types.h>
 #include "common_types.h"
-#include "osapi.h"
-#include "osapi-os-core.h"
 #include "os-shared-globaldefs.h"
 #include "os-freertos.h"
 
