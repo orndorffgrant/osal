@@ -3,13 +3,15 @@
 #include <sys/types.h>
 #include "common_types.h"
 #include "os-shared-globaldefs.h"
+#include "os-shared-module.h"
 #include "os-freertos.h"
 
-OS_impl_module_internal_record_t OS_impl_module_table[OS_MAX_MODULES];
-OS_module_internal_record_t OS_module_table[OS_MAX_MODULES];
+// sorry this struct doesn't exist anywhere that I can find it so commenting out so the build works
+// OS_impl_module_internal_record_t OS_impl_module_table[OS_MAX_MODULES];
+// OS_module_internal_record_t OS_module_table[OS_MAX_MODULES];
 
 int32 OS_FreeRTOS_ModuleAPI_Impl_Init(void){
-    memset(OS_impl_module_table, 0, sizeof(OS_impl_module_table));
+    // memset(OS_impl_module_table, 0, sizeof(OS_impl_module_table));
 	return OS_SUCCESS;
 }
 
