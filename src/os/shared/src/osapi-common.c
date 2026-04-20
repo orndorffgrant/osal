@@ -243,6 +243,7 @@ int32 OS_API_Init(void)
         OS_SharedGlobalVars.GlobalState = OS_SHUTDOWN_MAGIC_NUMBER;
     }
 
+    OS_DEBUG("OS_API_Init() Success\n");
     return return_code;
 }
 

@@ -9,6 +9,7 @@ OS_impl_bin_sem_internal_record_t OS_impl_bin_sem_table[OS_MAX_COUNT_SEMAPHORES]
  *-----------------------------------------------------------------*/
 int32 OS_FreeRTOS_BinSemAPI_Impl_Init(void)
 {
+    OS_DEBUG("Initializing\n");
     memset(OS_impl_bin_sem_table, 0, sizeof(OS_impl_bin_sem_table));
     return OS_SUCCESS;
 } /* end OS_FreeRTOS_BinSemAPI_Impl_Init */

@@ -5,6 +5,7 @@
 int32 OS_API_Impl_Init(osal_objtype_t idtype)
 {
     int32 return_code;
+    // OS_DEBUG("Initializing idtype %u\n", idtype);
 
     return_code = OS_FreeRTOS_TableMutex_Init(idtype);
     if(return_code != OS_SUCCESS){
@@ -51,6 +52,7 @@ int32 OS_API_Impl_Init(osal_objtype_t idtype)
 
 void OS_IdleLoop_Impl()
 {
+    OS_DEBUG("Idling\n");
     for(;;){
         vTaskDelay(1);
     }

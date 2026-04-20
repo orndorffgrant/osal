@@ -10,6 +10,7 @@ OS_impl_task_internal_record_t OS_impl_task_table[OS_MAX_TASKS];
  *-----------------------------------------------------------------*/
 int32 OS_FreeRTOS_TaskAPI_Impl_Init(void)
 {
+    OS_DEBUG("Initializing\n");
     memset(OS_impl_task_table, 0, sizeof(OS_impl_task_table));
     return (OS_SUCCESS);
 } /* end OS_FreeRTOS_TaskAPI_Impl_Init */
@@ -168,4 +169,3 @@ bool OS_TaskIdMatchSystemData_Impl(void *ref, const OS_object_token_t *token, co
 int32 OS_TaskValidateSystemData_Impl(const void *sysdata, size_t sysdata_size){
     return OS_ERROR; // @FIXME
 }
-

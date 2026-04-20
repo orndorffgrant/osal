@@ -10,6 +10,7 @@ OS_impl_queue_internal_record_t OS_impl_queue_table[OS_MAX_QUEUES];
  *-----------------------------------------------------------------*/
 int32 OS_FreeRTOS_QueueAPI_Impl_Init(void)
 {
+    OS_DEBUG("Initializing\n");
     memset(OS_impl_queue_table, 0, sizeof(OS_impl_queue_table));
     return OS_SUCCESS;
 } /* end OS_FreeRTOS_QueueAPI_Impl_Init */
