@@ -3,6 +3,8 @@
 #include <sys/types.h>
 #include "common_types.h"
 #include "os-shared-globaldefs.h"
+#include "os-shared-filesys.h"
+#include "os-shared-idmap.h"
 #include "os-freertos.h"
 
 // @TODO @FIXME
@@ -65,4 +67,44 @@ int32 OS_FreeRTOS_DirAPI_Impl_Init(void){
 int32 OS_GenericWrite_Impl(const OS_object_token_t *token, const void *buffer, size_t nbytes, OS_time_t abs_timeout)
 {
     return -1;
+}
+
+/*
+ * Fake a RAM-disk filesystem so CFE_ES_InitializeFileSystems() succeeds.
+ */
+int32 OS_FileSysStartVolume_Impl(const OS_object_token_t *token)
+{
+    OS_filesys_internal_record_t *filesys;
+
+    filesys = OS_OBJECT_TABLE_GET(OS_filesys_table, *token);
+    strncpy(filesys->system_mountpt, "/ramdev0", sizeof(filesys->system_mountpt) - 1);
+    filesys->system_mountpt[sizeof(filesys->system_mountpt) - 1] = '\0';
+
+    return OS_SUCCESS;
+}
+
+int32 OS_FileSysStopVolume_Impl(const OS_object_token_t *token)
+{
+    return OS_SUCCESS;
+}
+
+int32 OS_FileSysFormatVolume_Impl(const OS_object_token_t *token)
+{
+    return OS_SUCCESS;
+}
+
+int32 OS_FileSysMountVolume_Impl(const OS_object_token_t *token)
+{
+    return OS_SUCCESS;
+}
+
+int32 OS_FileSysUnmountVolume_Impl(const OS_object_token_t *token)
+{
+    return OS_SUCCESS;
+}
+
+int32 OS_FileSysStatVolume_Impl(const OS_object_token_t *token, OS_statvfs_t *StatBuf)
+{
+    memset(StatBuf, 0, sizeof(*StatBuf));
+    return OS_SUCCESS;
 }

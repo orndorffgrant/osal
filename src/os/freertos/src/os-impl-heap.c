@@ -5,16 +5,12 @@
 #include "os-shared-globaldefs.h"
 #include "os-freertos.h"
 
-HeapStats_t heapStats;
-
 int32 OS_HeapGetInfo_Impl(OS_heap_prop_t *heap_prop){
-	memset(&heapStats, 0, sizeof(heapStats));
-	vPortGetHeapStats(&heapStats);
+	memset(heap_prop, 0, sizeof(*heap_prop));
 
-	heap_prop->free_bytes = OSAL_SIZE_C(heapStats.xAvailableHeapSpaceInBytes);
-	// sorry commenting out because it doesn't compile
-	// heap_prop->free_blocks = OSAL_BLOCKCOUNT_C(heapStats.xNumberofFreeBlocks);
-	// heap_prop->largest_free_block = OSAL_SIZE_C(heapStats.xSizeOflargestFreeBlockInBytes);
+	heap_prop->free_bytes = xPortGetFreeHeapSize();
+	heap_prop->free_blocks = 0;
+	heap_prop->largest_free_block = 0;
 
 	return OS_SUCCESS;
 }

@@ -169,3 +169,8 @@ bool OS_TaskIdMatchSystemData_Impl(void *ref, const OS_object_token_t *token, co
 int32 OS_TaskValidateSystemData_Impl(const void *sysdata, size_t sysdata_size){
     return OS_ERROR; // @FIXME
 }
+
+int32 OS_TaskDetach_Impl(const OS_object_token_t *token)
+{
+    return OS_SUCCESS; // @FIXME
+}

@@ -49,3 +49,8 @@ int32 OS_TimeBaseGetInfo_Impl(const OS_object_token_t *token, OS_timebase_prop_t
     // @FIXME
     return -1;
 }
+
+int32 OS_GetLocalTime_Impl(OS_time_t *time_struct)
+{
+    return OS_ERR_NOT_IMPLEMENTED;
+}
