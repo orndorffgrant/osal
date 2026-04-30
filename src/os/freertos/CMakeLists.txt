@@ -44,7 +44,8 @@ list(APPEND FREERTOS_IMPL_SOURCES
 )
 # @FIXME Disable network and sockets (see VxWorks implementation)
 list(APPEND FREERTOS_IMPL_SOURCES
-    ../portable/os-impl-no-network.c    # non-implemented versions of all network APIs
+    ../portable/os-impl-no-network-gethostid.c    # non-implemented versions of all network APIs
+    ../portable/os-impl-no-network-gethostname.c    # non-implemented versions of all network APIs
     ../portable/os-impl-no-sockets.c    # non-implemented versions of all socket APIs
 )
 
